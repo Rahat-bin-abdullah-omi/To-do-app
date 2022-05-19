@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { createContext } from "react";
+import { Toaster } from "react-hot-toast";
+import { Route, Routes } from "react-router-dom";
+import RequireAuth from "./Auth/RequireAuth";
+import useFirebase from "./Hooks/useFirebase";
+import Login from "./Pages/Login/Login";
+import ToDos from "./Pages/ToDos/ToDos";
 
+export const AuthContext = createContext(null)
 function App() {
+    const {user, isAuth} = useFirebase();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <>
+       <Toaster />
+        <AuthContext.Provider value={{user, isAuth}}>
+            <Routes>
+                {/* normal routes  */}
+                <Route path="/login" element={<Login />}/>
+                {/* Protected Route  */}
+                <Route path="/" element={<RequireAuth><ToDos /></RequireAuth>}/>
+            </Routes>
+        
+        </AuthContext.Provider>
+     </>
   );
 }
 
