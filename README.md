@@ -15,10 +15,5 @@ this is task todo application using react and firebase mongoDB and much more thi
 - And also can add of your toDo
 - and completed toDo option can be.
 
-## Demo Link
-
-## Added Demo Preview
-
-![imageScreenshot](./preview.png)
 
 > Thanks for reach out me on Github.
